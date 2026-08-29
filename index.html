@@ -174,26 +174,46 @@ img{ max-width:100%; display:block; }
 .topbar-call:hover{ color:var(--blue); }
 .topbar-call svg{ width:14px; height:14px; flex:none; }
 
-/* ============================================================ 03 · HERO
-   Full-bleed studio photography with a diagonal seam, exactly the language of
-   their facilities band: copy on the dark left, dancers on the lit right. */
-.hero{
+/* ====================================================== 03 · THE ACT
+   Hero and form are ONE section, not two stacked ones. A single background
+   stack runs the whole height: smoke plate, then the studio photograph
+   DISSOLVING downward (a hard bottom edge is what read as a split), then the
+   diagonal seam running end to end to tie top and bottom together. The form
+   card is pulled up so it overlaps the photograph's fade rather than starting
+   below it — the bands interlock instead of stacking.                        */
+.act{
   position:relative;
   isolation:isolate;
   overflow:hidden;
   background:var(--ground);
   padding:112px 44px 104px;
 }
-.hero-bg{
-  position:absolute; inset:0; z-index:-3;
+/* smoke plate, full height */
+.act::before{
+  content:"";
+  position:absolute; inset:0; z-index:-4;
+  background-image:var(--img-smoke);
+  background-size:cover;
+  background-position:50% 62%;
+  opacity:.62;
+}
+/* the photograph. Fixed height so it keeps hero scale on a long page, and
+   masked so it melts into the ground instead of stopping at an edge. */
+.act-bg{
+  position:absolute; top:0; left:0; right:0; z-index:-3;
+  height:clamp(620px, 78vh, 1040px);
   background-image:var(--img-studio);
   background-size:cover;
-  background-position:72% 30%;
+  background-position:72% 26%;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 34%,rgba(0,0,0,0.972) 40.6%, rgba(0,0,0,0.896) 47.2%, rgba(0,0,0,0.784) 53.8%, rgba(0,0,0,0.648) 60.4%, rgba(0,0,0,0.500) 67.0%, rgba(0,0,0,0.352) 73.6%, rgba(0,0,0,0.216) 80.2%, rgba(0,0,0,0.104) 86.8%, rgba(0,0,0,0.028) 93.4%, rgba(0,0,0,0.000) 100.0%);
+          mask-image:linear-gradient(180deg,#000 0%,#000 34%,rgba(0,0,0,0.972) 40.6%, rgba(0,0,0,0.896) 47.2%, rgba(0,0,0,0.784) 53.8%, rgba(0,0,0,0.648) 60.4%, rgba(0,0,0,0.500) 67.0%, rgba(0,0,0,0.352) 73.6%, rgba(0,0,0,0.216) 80.2%, rgba(0,0,0,0.104) 86.8%, rgba(0,0,0,0.028) 93.4%, rgba(0,0,0,0.000) 100.0%);
 }
-/* the diagonal falloff — readable ground on the left, photograph on the right */
-.hero-veil{
+/* the diagonal falloff + the ambient blue fields, one layer, full height */
+.act-veil{
   position:absolute; inset:0; z-index:-2;
   background:
+    radial-gradient(38% 26% at 78% 62%, rgba(73,198,255,.16), rgba(73,198,255,0) 72%),
+    radial-gradient(42% 30% at 4% 88%, rgba(73,198,255,.09), rgba(73,198,255,0) 74%),
     linear-gradient(100deg,
       var(--ground) 0%,
       var(--ground) 34%,
@@ -201,20 +221,22 @@ img{ max-width:100%; display:block; }
       rgba(8,9,11,.62) 58%,
       rgba(8,9,11,.30) 74%,
       rgba(8,9,11,.62) 100%),
-    linear-gradient(180deg, rgba(8,9,11,.55) 0%, rgba(8,9,11,0) 26%, rgba(8,9,11,.72) 100%);
+    linear-gradient(180deg, rgba(8,9,11,.55) 0%, rgba(8,9,11,.22) 14%, rgba(8,9,11,.06) 24%, rgba(8,9,11,.10) 34%, rgba(8,9,11,.22) 44%, rgba(8,9,11,.40) 54%, rgba(8,9,11,.60) 64%, rgba(8,9,11,.76) 74%, rgba(8,9,11,.87) 84%, rgba(8,9,11,.93) 92%, rgba(8,9,11,.95) 100%);
 }
-/* the glowing seam itself */
-.hero-seam{
+/* one seam through the whole composition, fading out at both ends */
+.act-seam{
   position:absolute; z-index:-1;
-  top:-24%; bottom:-24%; left:59%;
+  top:-4%; bottom:-4%; left:59%;
   width:1px;
   transform:rotate(7deg);
-  background:linear-gradient(180deg, rgba(73,198,255,0), var(--blue) 42%, rgba(73,198,255,.55) 68%, rgba(73,198,255,0));
-  box-shadow:0 0 22px 2px rgba(73,198,255,.42);
+  background:linear-gradient(180deg,
+    rgba(73,198,255,0) 0%, var(--blue) 26%, rgba(73,198,255,.62) 52%,
+    rgba(73,198,255,.24) 74%, rgba(73,198,255,0) 100%);
+  box-shadow:0 0 22px 2px rgba(73,198,255,.34);
   opacity:.85;
 }
-.hero-in{ position:relative; max-width:1240px; margin:0 auto; }
-.hero-copy{ max-width:690px; }
+.act-in{ position:relative; max-width:1240px; margin:0 auto; }
+.act-head{ max-width:690px; }
 
 .eyebrow{
   font-family:var(--script);
@@ -243,15 +265,15 @@ h1{ margin:0; }
   color:var(--blue);
   margin-top:6px;
 }
-.hero-sub{
+.act-sub{
   max-width:498px;
   margin:26px 0 0;
   font-size:16.5px; line-height:1.7;
   color:var(--t-74);
 }
-.hero-sub strong{ color:var(--t-100); font-weight:600; }
+.act-sub strong{ color:var(--t-100); font-weight:600; }
 
-.hero-meta{
+.act-meta{
   display:flex; flex-wrap:wrap; gap:10px;
   margin-top:30px;
 }
@@ -268,34 +290,12 @@ h1{ margin:0; }
 }
 .chip svg{ width:13px; height:13px; color:var(--blue); flex:none; }
 
-/* ============================================================ 04 · STAGE
-   The form band. Their own smoke plate as ground so it reads as one film. */
-.stage{
-  position:relative;
-  padding:88px 44px 104px;
-  background:var(--ground);
-  overflow:hidden;
-}
-.stage::before{
-  content:"";
-  position:absolute; inset:0;
-  background-image:var(--img-smoke);
-  background-size:cover;
-  background-position:50% 40%;
-  opacity:.75;
-  pointer-events:none;
-}
-.stage::after{
-  content:"";
-  position:absolute; inset:0;
-  background:
-    radial-gradient(48% 40% at 76% 2%, rgba(73,198,255,.20), rgba(73,198,255,0) 70%),
-    radial-gradient(46% 44% at 6% 84%, rgba(73,198,255,.10), rgba(73,198,255,0) 72%),
-    linear-gradient(180deg, rgba(8,9,11,.42), rgba(8,9,11,.88));
-  pointer-events:none;
-}
-.stage-in{ position:relative; z-index:1; max-width:1240px; margin:0 auto; }
+/* ------------------------------------------------------- 04 · THE SPLIT
+   Pulled up close under the headline so the form card rises into the
+   photograph's fade. This gap is the whole difference between "one thing"
+   and "two sections" — it used to be 192px of dead ground.                   */
 .split{
+  margin-top:56px;
   display:grid;
   grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);
   gap:64px;
@@ -607,12 +607,13 @@ footer p{
 
 /* ====================================================== 08 · RESPONSIVE */
 @media (min-width:1700px){
-  .hero{ padding:140px 44px 128px; }
-  .hero-copy{ max-width:830px; }
+  .act{ padding:140px 44px 128px; }
+  .act-head{ max-width:830px; }
   .h1-line{ font-size:70px; }
   .h1-script{ font-size:100px; }
-  .hero-sub{ font-size:18px; max-width:560px; }
-  .stage-in, .hero-in, .topbar-in{ max-width:1380px; }
+  .act-sub{ font-size:18px; max-width:560px; }
+  .act-in, .topbar-in{ max-width:1380px; }
+  .split{ margin-top:68px; }
   .split{ gap:80px; }
   form{ padding:36px 44px 44px; }
   .cardhead{ padding:20px 44px; }
@@ -633,24 +634,26 @@ footer p{
   .rail-sub{ order:5; }
   .steps{ order:6; }
   .studio{ order:7; }
-  .hero-seam{ display:none; }
-  .hero-veil{
+  .act-seam{ display:none; }
+  .act-bg{ height:clamp(460px,62vh,720px); background-position:64% 24%; }
+  .act-veil{
     background:
-      linear-gradient(180deg, rgba(8,9,11,.72) 0%, rgba(8,9,11,.86) 46%, rgba(8,9,11,.96) 100%),
-      linear-gradient(100deg, var(--ground) 0%, rgba(8,9,11,.6) 60%, rgba(8,9,11,.35) 100%);
+      radial-gradient(60% 22% at 50% 58%, rgba(73,198,255,.12), rgba(73,198,255,0) 74%),
+      linear-gradient(180deg, rgba(8,9,11,.70) 0%, rgba(8,9,11,.80) 34%, rgba(8,9,11,.94) 62%, rgba(8,9,11,.97) 100%),
+      linear-gradient(100deg, var(--ground) 0%, rgba(8,9,11,.55) 62%, rgba(8,9,11,.30) 100%);
   }
+  .split{ margin-top:44px; }
 }
 
 @media (max-width:720px){
   .topbar-in{ padding:13px 20px; gap:14px; }
   .topbar-logo img{ height:34px; }
   .topbar-call span{ display:none; }
-  .hero{ padding:64px 20px 60px; }
+  .act{ padding:64px 20px 72px; }
   .eyebrow{ font-size:30px; }
-  .hero-sub{ margin-top:22px; }
-  .hero-meta{ gap:8px; margin-top:26px; }
+  .act-sub{ margin-top:22px; }
+  .act-meta{ gap:8px; margin-top:26px; }
   .chip{ padding:8px 13px; font-size:11px; }
-  .stage{ padding:56px 20px 72px; }
   .split{ gap:0; }
   form{ padding:26px 22px 28px; }
   .cardhead{ padding:15px 22px; font-size:9.5px; letter-spacing:.10em; }
@@ -675,7 +678,7 @@ footer p{
 }
 
 @media print{
-  .topbar,footer,.cta-block,.hero-bg,.hero-veil,.hero-seam{ display:none; }
+  .topbar,footer,.cta-block,.act-bg,.act-veil,.act-seam{ display:none; }
   body{ background:#fff; color:#111; }
 }
 </style>
@@ -701,24 +704,24 @@ footer p{
 <main id="page">
 
   <!-- ============================================================== HERO -->
-  <section class="hero">
-    <div class="hero-bg" role="img" aria-label="An LSCD dancer in arabesque in the mirrored studio under blue stage light"></div>
-    <div class="hero-veil" aria-hidden="true"></div>
-    <div class="hero-seam" aria-hidden="true"></div>
+  <section class="act">
+    <div class="act-bg" role="img" aria-label="An LSCD dancer in arabesque in the mirrored studio under blue stage light"></div>
+    <div class="act-veil" aria-hidden="true"></div>
+    <div class="act-seam" aria-hidden="true"></div>
 
-    <div class="hero-in">
-      <div class="hero-copy">
+    <div class="act-in">
+      <div class="act-head">
         <p class="eyebrow rise" data-d="0">Registration</p>
         <h1>
           <span class="h1-line rise" data-d="90">Register Your Dancer</span>
           <span class="h1-script rise" data-d="190">Your first class is free.</span>
         </h1>
         <div class="rule rise" data-d="280"></div>
-        <p class="hero-sub rise" data-d="340">
+        <p class="act-sub rise" data-d="340">
           Tell us about your dancer and we&rsquo;ll place them in the right class, then call to set
           the day and time. <strong>No card required.</strong>
         </p>
-        <div class="hero-meta rise" data-d="420">
+        <div class="act-meta rise" data-d="420">
           <span class="chip">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
             Ages 18 months to adult
@@ -733,12 +736,7 @@ footer p{
           </span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ============================================================= STAGE -->
-  <section class="stage">
-    <div class="stage-in">
       <div class="split">
 
         <!-- ---------------------------------------------------- rail -->
