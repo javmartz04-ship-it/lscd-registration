@@ -1021,7 +1021,11 @@ footer p{
      studentLevel, classInterest, submittedAt, source, pageUrl }
 ------------------------------------------------------------------------- */
 var CONFIG = {
-  endpoint: "",
+  /* LIVE. GoHighLevel inbound webhook trigger. Verified to allow browser
+     requests (access-control-allow-origin: *), so the plain JSON POST below
+     reaches it directly from the page. Clear this string to go back to safe
+     preview mode, where nothing is sent anywhere. */
+  endpoint: "https://services.leadconnectorhq.com/hooks/dR6LFJkgwnjPY32EghGd/webhook-trigger/0dfb9a5b-6b21-4490-9f6e-d25a44976fd1",
   notifyEmail: "laredoscd@gmail.com",
   studioPhone: "(956) 220-1532",
   source: "LSCD Registration Page"
@@ -1272,18 +1276,44 @@ var SUGGEST = {
 
   /* ---------------------------------------------------------- submission */
   function payload(){
+    var pName = valueOf("parentName");
+    var parts = pName.split(/\s+/);
+    var digits = valueOf("parentPhone").replace(/\D/g, "");
+
     return {
-      parentName:   valueOf("parentName"),
+      /* Standard names first, so the GoHighLevel workflow can map contact
+         fields straight off the payload with no massaging. Phone is E.164
+         because GHL expects that format for a US number. */
+      first_name: parts[0] || pName,
+      last_name:  parts.length > 1 ? parts.slice(1).join(" ") : "",
+      full_name:  pName,
+      email:      valueOf("parentEmail"),
+      phone:      digits.length === 10 ? "+1" + digits : digits,
+
+      /* The form's own fields, readable, for custom fields and notifications. */
+      parentName:   pName,
       parentEmail:  valueOf("parentEmail"),
       parentPhone:  valueOf("parentPhone"),
       studentName:  valueOf("studentName"),
       studentAge:   valueOf("studentAge"),
       studentLevel: valueOf("studentLevel"),
       classInterest:valueOf("classInterest"),
+
       submittedAt:  new Date().toISOString(),
       source:       CONFIG.source,
       pageUrl:      location.href
     };
+  }
+
+  /* Local copy of every entry, live or not. If a webhook or workflow ever
+     drops one, the parent's own browser still has it:
+     JSON.parse(localStorage.lscd_registrations) */
+  function keepLocalCopy(data){
+    try {
+      var store = JSON.parse(localStorage.getItem("lscd_registrations") || "[]");
+      store.push(data);
+      localStorage.setItem("lscd_registrations", JSON.stringify(store));
+    } catch (err) { /* private browsing — ignore */ }
   }
 
   function showSuccess(data){
@@ -1338,14 +1368,11 @@ var SUGGEST = {
     submit.disabled = true;
     $("#ctaLabel").textContent = "Sending…";
 
-    /* SAFE PREVIEW — no endpoint set. Keeps the entry locally, sends nothing. */
+    keepLocalCopy(data);
+
+    /* SAFE PREVIEW — no endpoint set. Sends nothing. */
     if (!CONFIG.endpoint){
-      try {
-        var store = JSON.parse(localStorage.getItem("lscd_registrations") || "[]");
-        store.push(data);
-        localStorage.setItem("lscd_registrations", JSON.stringify(store));
-      } catch (err) { /* private browsing — ignore */ }
-      console.log("[LSCD] Preview mode — no endpoint set. Entry captured locally:", data);
+      console.log("[LSCD] Preview mode — no endpoint set. Entry captured locally only:", data);
       window.setTimeout(function(){ showSuccess(data); }, 480);
       return;
     }
