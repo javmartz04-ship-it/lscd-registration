@@ -123,9 +123,28 @@
   --img-footer: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/footer-bg.png");
 }
 
+/* The full-size art is 3.2 MB. WordPress already generated smaller renditions,
+   so phones and tablets get those instead — same pictures, a third of the bytes,
+   and at these sizes the difference is invisible. */
+@media (max-width:1080px){
+  :root{
+    --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599-1024x838.png");
+    --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg-1024x771.png");
+    --img-footer: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/footer-bg-1024x341.png");
+  }
+}
+@media (max-width:720px){
+  :root{
+    --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599-768x628.png");
+    --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg-768x578.png");
+    --img-footer: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/footer-bg-768x256.png");
+  }
+}
+
 *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
 html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; background:var(--ground); }
 body{
+  -webkit-tap-highlight-color:rgba(73,198,255,.18);
   font-family:var(--mont);
   font-size:16px;
   line-height:1.6;
@@ -160,18 +179,20 @@ img{ max-width:100%; display:block; }
 }
 .topbar-in{
   max-width:1240px; margin:0 auto;
-  padding:15px 44px;
+  padding:15px max(44px, env(safe-area-inset-right)) 15px max(44px, env(safe-area-inset-left));
   display:flex; align-items:center; justify-content:space-between; gap:24px;
 }
+.topbar-logo{ display:inline-flex; align-items:center; min-height:44px; }
 .topbar-logo img{ height:44px; width:auto; }
 .topbar-call{
   font-family:var(--oswald); font-weight:400; font-size:14px;
   letter-spacing:.11em; text-transform:uppercase;
   color:var(--t-74); text-decoration:none;
   display:inline-flex; align-items:center; gap:9px;
+  min-height:44px;                    /* thumb-sized, not text-sized */
   transition:color .32s var(--ease); white-space:nowrap;
 }
-.topbar-call:hover{ color:var(--blue); }
+@media (hover:hover){ .topbar-call:hover{ color:var(--blue); } }
 .topbar-call svg{ width:14px; height:14px; flex:none; }
 
 /* ====================================================== 03 · THE ACT
@@ -352,8 +373,12 @@ h1{ margin:0; }
   margin-bottom:3px;
 }
 .studio-v{ display:block; font-size:14.5px; line-height:1.6; color:var(--t-100); }
-.studio-v a{ color:var(--t-100); text-decoration:none; border-bottom:1px solid var(--line); }
-.studio-v a:hover{ color:var(--blue); border-bottom-color:var(--blue-line); }
+.studio-v a{
+  color:var(--t-100); text-decoration:none;
+  border-bottom:1px solid var(--line);
+  display:inline-flex; align-items:center; min-height:44px;
+}
+@media (hover:hover){ .studio-v a:hover{ color:var(--blue); border-bottom-color:var(--blue-line); } }
 
 /* ------------------------------------------------- 04b · the form card
    Double bezel on dark: outer shell catches a rim light, inner core is the
@@ -433,7 +458,11 @@ legend b{
 .field input,
 .field select{
   width:100%;
-  font-family:var(--mont); font-size:15px; font-weight:400; line-height:1.4;
+  font-family:var(--mont);
+  /* 16px is not a style choice: iOS Safari zooms the whole page when a focused
+     field is smaller, which throws the parent out of the layout mid-form. */
+  font-size:16px;
+  font-weight:400; line-height:1.4;
   color:var(--t-100);
   background:var(--field);
   border:1px solid var(--field-line);
@@ -443,8 +472,10 @@ legend b{
   -webkit-appearance:none; appearance:none;
 }
 .field input::placeholder{ color:var(--t-50); }
-.field input:hover,
-.field select:hover{ border-color:rgba(255,255,255,.22); }
+@media (hover:hover){
+  .field input:hover,
+  .field select:hover{ border-color:rgba(255,255,255,.22); }
+}
 .field input:focus,
 .field select:focus{
   outline:none;
@@ -505,7 +536,9 @@ legend b{
   transition:background-color .34s var(--ease), box-shadow .34s var(--ease), transform .34s var(--ease);
   overflow:hidden;
 }
-.cta:hover{ background:#66D0FF; box-shadow:var(--shadow-cta-h); transform:translateY(-1px); }
+@media (hover:hover){
+  .cta:hover{ background:#66D0FF; box-shadow:var(--shadow-cta-h); transform:translateY(-1px); }
+  }
 .cta:active{ transform:translateY(0); }
 .cta[disabled]{ opacity:.62; cursor:progress; transform:none; }
 .cta-ico{
@@ -619,6 +652,17 @@ footer p{
   .cardhead{ padding:20px 44px; }
 }
 
+@media (min-width:2200px){
+  .act-in, .topbar-in{ max-width:1560px; }
+  .act-head{ max-width:920px; }
+  .h1-line{ font-size:78px; }
+  .h1-script{ font-size:112px; }
+  .act-sub{ font-size:19px; max-width:640px; }
+  .act{ padding-top:160px; padding-bottom:150px; }
+  .split{ margin-top:76px; gap:88px; }
+  .act-bg{ height:clamp(900px,64vh,1280px); }
+}
+
 @media (max-width:1080px){
   /* The form comes second only to the headline — a parent on a phone should
      not scroll past the whole reassurance rail to reach the fields.
@@ -635,25 +679,38 @@ footer p{
   .steps{ order:6; }
   .studio{ order:7; }
   .act-seam{ display:none; }
-  .act-bg{ height:clamp(460px,62vh,720px); background-position:64% 24%; }
+  /* px, not vh: a vh-sized layer re-lays-out every time the mobile URL bar
+     shows or hides, which reads as the photograph twitching while you scroll. */
+  .act-bg{ height:clamp(420px,74vw,660px); background-position:64% 22%; }
   .act-veil{
     background:
       radial-gradient(60% 22% at 50% 58%, rgba(73,198,255,.12), rgba(73,198,255,0) 74%),
-      linear-gradient(180deg, rgba(8,9,11,.70) 0%, rgba(8,9,11,.80) 34%, rgba(8,9,11,.94) 62%, rgba(8,9,11,.97) 100%),
+      /* lifted only across the top band, which sits ABOVE the copy — the dancer
+         reads on a phone without touching headline legibility below it */
+      linear-gradient(180deg, rgba(8,9,11,.46) 0%, rgba(8,9,11,.54) 9%, rgba(8,9,11,.68) 18%, rgba(8,9,11,.80) 34%, rgba(8,9,11,.94) 62%, rgba(8,9,11,.97) 100%),
       linear-gradient(100deg, var(--ground) 0%, rgba(8,9,11,.55) 62%, rgba(8,9,11,.30) 100%);
   }
-  .split{ margin-top:44px; }
+  .split{ margin-top:36px; }
 }
 
 @media (max-width:720px){
-  .topbar-in{ padding:13px 20px; gap:14px; }
+  .topbar-in{
+    padding:10px max(20px, env(safe-area-inset-right)) 10px max(20px, env(safe-area-inset-left));
+    gap:14px;
+  }
   .topbar-logo img{ height:34px; }
   .topbar-call span{ display:none; }
-  .act{ padding:64px 20px 72px; }
-  .eyebrow{ font-size:30px; }
-  .act-sub{ margin-top:22px; }
-  .act-meta{ gap:8px; margin-top:26px; }
-  .chip{ padding:8px 13px; font-size:11px; }
+  /* Trimmed so the top of the form card breaks the fold on a 667px phone —
+     the parent should see where they are going without hunting for it. */
+  .act{
+    padding:40px max(20px, env(safe-area-inset-right)) 64px max(20px, env(safe-area-inset-left));
+  }
+  .eyebrow{ font-size:26px; margin-bottom:8px; }
+  .rule{ margin-top:16px; width:72px; }
+  .act-sub{ margin-top:18px; font-size:15.5px; line-height:1.62; }
+  .act-meta{ gap:7px; margin-top:20px; }
+  .chip{ padding:7px 11px; font-size:10.5px; gap:7px; }
+  .chip svg{ width:12px; height:12px; }
   .split{ gap:0; }
   form{ padding:26px 22px 28px; }
   .cardhead{ padding:15px 22px; font-size:9.5px; letter-spacing:.10em; }
@@ -661,14 +718,41 @@ footer p{
   .row.two{ grid-template-columns:minmax(0,1fr); }
   .cta{ padding:19px 18px; font-size:13px; letter-spacing:.09em; gap:10px; }
   .done{ padding:48px 22px 40px; }
-  .rail-eyebrow{ margin-top:56px; }
+  .rail-eyebrow{ margin-top:48px; }
   footer{ padding:32px 20px; }
 }
 
 /* The script line breaks on narrow screens — but deliberately, balanced
    across two lines, never with "free." stranded as a widow. */
 @media (max-width:560px){
-  .h1-script{ font-size:clamp(48px,13.6vw,62px); line-height:.98; text-wrap:balance; }
+  .h1-script{ font-size:clamp(44px,13.2vw,62px); line-height:.98; text-wrap:balance; }
+}
+
+/* Small phones: 320–380px. Claw back gutter so the fields stay comfortable,
+   and stop the CTA label wrapping to two lines. */
+@media (max-width:380px){
+  .act{ padding-left:max(16px, env(safe-area-inset-left)); padding-right:max(16px, env(safe-area-inset-right)); }
+  .topbar-in{ padding-left:max(16px, env(safe-area-inset-left)); padding-right:max(16px, env(safe-area-inset-right)); }
+  form{ padding:24px 18px 26px; }
+  .cardhead{ padding:14px 18px; }
+  .done{ padding:44px 18px 36px; }
+  .shell{ padding:8px; }
+  .cta{ padding:18px 12px; font-size:12px; letter-spacing:.06em; gap:8px; }
+  .cta-ico{ width:22px; height:22px; }
+  .h1-line{ font-size:33px; }
+  .studio{ padding:20px 18px; }
+  .step{ gap:14px; }
+}
+
+/* Short landscape phones: the hero should not eat the whole screen before the
+   form, and there is no room for a tall photograph. */
+@media (max-height:560px) and (orientation:landscape){
+  .act{ padding-top:32px; padding-bottom:48px; }
+  .act-bg{ height:340px; }
+  .eyebrow{ font-size:24px; }
+  .h1-script{ font-size:44px; }
+  .act-meta{ margin-top:16px; }
+  .split{ margin-top:28px; }
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -692,7 +776,11 @@ footer p{
 <header class="topbar">
   <div class="topbar-in">
     <a class="topbar-logo" href="https://blueviolet-wren-942205.hostingersite.com/" aria-label="Laredo School of Contemporary Dance home">
-      <img src="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818.png" alt="Laredo School of Contemporary Dance">
+      <img src="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png"
+           srcset="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png 768w,
+                   https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-1536x397.png 1536w"
+           sizes="180px" width="768" height="199"
+           alt="Laredo School of Contemporary Dance">
     </a>
     <a class="topbar-call" href="tel:+19562201532">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -898,7 +986,11 @@ footer p{
 </main>
 
 <footer>
-  <img src="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818.png" alt="Laredo School of Contemporary Dance">
+  <img src="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png"
+       srcset="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png 768w,
+               https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-1536x397.png 1536w"
+       sizes="170px" width="768" height="199" loading="lazy"
+       alt="Laredo School of Contemporary Dance">
   <p>&copy; 2026 LSCD. All rights reserved.</p>
 </footer>
 
