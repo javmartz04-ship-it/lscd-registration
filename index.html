@@ -135,7 +135,6 @@
   --ease-soft: cubic-bezier(.4,.14,.3,1);
 
   /* their own assets */
-  --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599.png");
   --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg.png");
 }
 
@@ -144,13 +143,11 @@
    and at these sizes the difference is invisible. */
 @media (max-width:1080px){
   :root{
-    --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599-1024x838.png");
     --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg-1024x771.png");
   }
 }
 @media (max-width:720px){
   :root{
-    --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599-768x628.png");
     --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg-768x578.png");
   }
 }
@@ -232,46 +229,27 @@ img{ max-width:100%; display:block; }
   background-position:50% 62%;
   opacity:.62;
 }
-/* the photograph. Fixed height so it keeps hero scale on a long page, and
-   masked so it melts into the ground instead of stopping at an edge. */
-.act-bg{
-  position:absolute; top:0; left:0; right:0; z-index:-3;
-  height:clamp(620px, 78vh, 1040px);
-  background-image:var(--img-studio);
-  background-size:cover;
-  background-position:72% 26%;
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 34%,rgba(0,0,0,0.972) 40.6%, rgba(0,0,0,0.896) 47.2%, rgba(0,0,0,0.784) 53.8%, rgba(0,0,0,0.648) 60.4%, rgba(0,0,0,0.500) 67.0%, rgba(0,0,0,0.352) 73.6%, rgba(0,0,0,0.216) 80.2%, rgba(0,0,0,0.104) 86.8%, rgba(0,0,0,0.028) 93.4%, rgba(0,0,0,0.000) 100.0%);
-          mask-image:linear-gradient(180deg,#000 0%,#000 34%,rgba(0,0,0,0.972) 40.6%, rgba(0,0,0,0.896) 47.2%, rgba(0,0,0,0.784) 53.8%, rgba(0,0,0,0.648) 60.4%, rgba(0,0,0,0.500) 67.0%, rgba(0,0,0,0.352) 73.6%, rgba(0,0,0,0.216) 80.2%, rgba(0,0,0,0.104) 86.8%, rgba(0,0,0,0.028) 93.4%, rgba(0,0,0,0.000) 100.0%);
-}
 /* the diagonal falloff + the ambient blue fields, one layer, full height */
 .act-veil{
   position:absolute; inset:0; z-index:-2;
   background:
-    radial-gradient(38% 26% at 78% 62%, rgba(73,198,255,.16), rgba(73,198,255,0) 72%),
-    radial-gradient(42% 30% at 4% 88%, rgba(73,198,255,.09), rgba(73,198,255,0) 74%),
-    linear-gradient(100deg,
-      var(--ground) 0%,
-      var(--ground) 34%,
-      rgba(8,9,11,.94) 44%,
-      rgba(8,9,11,.62) 58%,
-      rgba(8,9,11,.30) 74%,
-      rgba(8,9,11,.62) 100%),
-    linear-gradient(180deg, rgba(8,9,11,.55) 0%, rgba(8,9,11,.22) 14%, rgba(8,9,11,.06) 24%, rgba(8,9,11,.10) 34%, rgba(8,9,11,.22) 44%, rgba(8,9,11,.40) 54%, rgba(8,9,11,.60) 64%, rgba(8,9,11,.76) 74%, rgba(8,9,11,.87) 84%, rgba(8,9,11,.93) 92%, rgba(8,9,11,.95) 100%);
+    radial-gradient(44% 34% at 76% 6%, rgba(73,198,255,.16), rgba(73,198,255,0) 72%),
+    radial-gradient(46% 40% at 4% 86%, rgba(73,198,255,.10), rgba(73,198,255,0) 74%),
+    linear-gradient(180deg, rgba(8,9,11,.30) 0%, rgba(8,9,11,0) 30%, rgba(8,9,11,.55) 76%, rgba(8,9,11,.88) 100%);
 }
-/* one seam through the whole composition, fading out at both ends */
-.act-seam{
-  position:absolute; z-index:-1;
-  top:-4%; bottom:-4%; left:59%;
-  width:1px;
-  transform:rotate(7deg);
-  background:linear-gradient(180deg,
-    rgba(73,198,255,0) 0%, var(--blue) 26%, rgba(73,198,255,.62) 52%,
-    rgba(73,198,255,.24) 74%, rgba(73,198,255,0) 100%);
-  box-shadow:0 0 22px 2px rgba(73,198,255,.34);
-  opacity:.85;
+.act-in{
+  position:relative;
+  max-width:1320px; margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);
+  grid-template-areas:"head form" "rail form";
+  column-gap:64px;
+  row-gap:56px;
+  align-items:start;
 }
-.act-in{ position:relative; max-width:1240px; margin:0 auto; }
-.act-head{ max-width:690px; }
+.act-head{ grid-area:head; }
+.rail{ grid-area:rail; }
+.formwrap{ grid-area:form; }
 
 .eyebrow{
   font-family:var(--script);
@@ -325,20 +303,7 @@ h1{ margin:0; }
 }
 .chip svg{ width:13px; height:13px; color:var(--blue); flex:none; }
 
-/* ------------------------------------------------------- 04 · THE SPLIT
-   Pulled up close under the headline so the form card rises into the
-   photograph's fade. This gap is the whole difference between "one thing"
-   and "two sections" — it used to be 192px of dead ground.                   */
-.split{
-  margin-top:56px;
-  display:grid;
-  grid-template-columns:minmax(0,0.72fr) minmax(0,1.28fr);
-  gap:64px;
-  align-items:start;
-}
-
 /* ------------------------------------------------------- 04a · left rail */
-.rail{ position:sticky; top:40px; }
 .rail-eyebrow{ font-size:30px; margin-bottom:6px; }
 .rail-h{
   font-family:var(--oswald); font-weight:600;
@@ -595,7 +560,7 @@ legend b{
   font-size:clamp(48px,5.4vw,72px);
   line-height:.98;
   text-wrap:balance;
-  color:var(--blue-deep);
+  color:#1E8FC4;              /* 3.5:1 on the card — #21AEEF measured 2.4:1 */
   margin-bottom:14px;
 }
 .done h2{
@@ -651,50 +616,36 @@ footer p{
   .h1-line{ font-size:70px; }
   .h1-script{ font-size:100px; }
   .act-sub{ font-size:18px; max-width:560px; }
-  .act-in, .topbar-in{ max-width:1380px; }
-  .split{ margin-top:68px; }
-  .split{ gap:80px; }
+  .act-in, .topbar-in{ max-width:1520px; }
+  .act-in{ column-gap:72px; row-gap:64px; }
   form{ padding:36px 44px 44px; }
   .cardhead{ padding:20px 44px; }
 }
 
 @media (min-width:2200px){
-  .act-in, .topbar-in{ max-width:1560px; }
-  .act-head{ max-width:920px; }
+  .act-in, .topbar-in{ max-width:1680px; }
+  .act-in{ column-gap:88px; row-gap:72px; }
   .h1-line{ font-size:78px; }
   .h1-script{ font-size:112px; }
   .act-sub{ font-size:19px; max-width:640px; }
   .act{ padding-top:160px; padding-bottom:150px; }
-  .split{ margin-top:76px; gap:88px; }
-  .act-bg{ height:clamp(900px,64vh,1280px); }
 }
 
 @media (max-width:1080px){
-  /* The form comes second only to the headline — a parent on a phone should
-     not scroll past the whole reassurance rail to reach the fields.
-     `display:contents` lifts the rail's children into the grid to reorder. */
-  .split{ grid-template-columns:minmax(0,1fr); gap:0; }
-  .rail{ display:contents; }
-  /* every rail child needs an explicit order — one without it defaults to 0
-     and jumps above the form, stranded from the heading it belongs to */
-  .formwrap{ order:1; }
-  .rail-eyebrow{ order:2; margin-top:64px; }
-  .rail-h{ order:3; }
-  .rail-rule{ order:4; }
-  .rail-sub{ order:5; }
-  .steps{ order:6; }
-  .studio{ order:7; }
-  .act-seam{ display:none; }
+  /* One column, and the form comes straight after the headline — a parent on
+     a phone should not scroll past the reassurance rail to reach the fields. */
+  .act-in{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"head" "form" "rail";
+    row-gap:44px;
+  }
+  .rail-eyebrow{ margin-top:20px; }
   /* px, not vh: a vh-sized layer re-lays-out every time the mobile URL bar
      shows or hides, which reads as the photograph twitching while you scroll. */
-  .act-bg{ height:clamp(420px,74vw,660px); background-position:64% 22%; }
   .act-veil{
     background:
-      radial-gradient(60% 22% at 50% 58%, rgba(73,198,255,.12), rgba(73,198,255,0) 74%),
-      /* lifted only across the top band, which sits ABOVE the copy — the dancer
-         reads on a phone without touching headline legibility below it */
-      linear-gradient(180deg, rgba(8,9,11,.46) 0%, rgba(8,9,11,.54) 9%, rgba(8,9,11,.68) 18%, rgba(8,9,11,.80) 34%, rgba(8,9,11,.94) 62%, rgba(8,9,11,.97) 100%),
-      linear-gradient(100deg, var(--ground) 0%, rgba(8,9,11,.55) 62%, rgba(8,9,11,.30) 100%);
+      radial-gradient(70% 20% at 50% 4%, rgba(73,198,255,.16), rgba(73,198,255,0) 74%),
+      linear-gradient(180deg, rgba(8,9,11,0) 0%, rgba(8,9,11,.35) 62%, rgba(8,9,11,.80) 100%);
   }
   .split{ margin-top:36px; }
 }
@@ -754,7 +705,6 @@ footer p{
    form, and there is no room for a tall photograph. */
 @media (max-height:560px) and (orientation:landscape){
   .act{ padding-top:32px; padding-bottom:48px; }
-  .act-bg{ height:340px; }
   .eyebrow{ font-size:24px; }
   .h1-script{ font-size:44px; }
   .act-meta{ margin-top:16px; }
@@ -768,7 +718,7 @@ footer p{
 }
 
 @media print{
-  .topbar,footer,.cta-block,.act-bg,.act-veil,.act-seam{ display:none; }
+  .topbar,footer,.cta-block,.act-veil{ display:none; }
   body{ background:#fff; color:#111; }
 }
 </style>
@@ -799,9 +749,7 @@ footer p{
 
   <!-- ============================================================== HERO -->
   <section class="act">
-    <div class="act-bg" role="img" aria-label="An LSCD dancer in arabesque in the mirrored studio under blue stage light"></div>
     <div class="act-veil" aria-hidden="true"></div>
-    <div class="act-seam" aria-hidden="true"></div>
 
     <div class="act-in">
       <div class="act-head">
@@ -831,10 +779,8 @@ footer p{
         </div>
       </div>
 
-      <div class="split">
-
-        <!-- ---------------------------------------------------- rail -->
-        <aside class="rail">
+      <!-- ---------------------------------------------------- rail -->
+      <aside class="rail">
           <p class="eyebrow rail-eyebrow rise" data-d="0">Before you come in</p>
           <h2 class="rail-h rise" data-d="50">What happens next</h2>
           <div class="rule rail-rule rise" data-d="60"></div>
@@ -970,7 +916,7 @@ footer p{
               <!-- --------------------------------------------- success -->
               <div class="done" id="done" role="status" aria-live="polite">
                 <div class="done-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#21AEEF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#177CAE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
                 <p class="done-script" id="doneName">You&rsquo;re registered.</p>
                 <h2>We&rsquo;ll give you a call</h2>
