@@ -92,14 +92,14 @@
 
   --line:        rgba(255,255,255,.10);
   --line-soft:   rgba(255,255,255,.06);
-  --field:       rgba(255,255,255,.04);
-  --field-line:  rgba(255,255,255,.13);
+  --field:       rgba(0,0,0,.30);
+  --field-line:  rgba(255,255,255,.15);
 
   --danger:      #E88C7D;
   --danger-wash: rgba(232,140,125,.10);
   --danger-line: rgba(232,140,125,.32);
 
-  --shadow-lift: 0 40px 90px -40px rgba(0,0,0,.9);
+  --shadow-lift: 0 48px 100px -34px rgba(0,0,0,.96), 0 10px 26px -14px rgba(0,0,0,.75);
   --shadow-cta:  0 16px 40px -14px rgba(73,198,255,.50);
   --shadow-cta-h:0 20px 52px -14px rgba(73,198,255,.66);
 
@@ -120,7 +120,6 @@
   /* their own assets */
   --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599.png");
   --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg.png");
-  --img-footer: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/footer-bg.png");
 }
 
 /* The full-size art is 3.2 MB. WordPress already generated smaller renditions,
@@ -130,14 +129,12 @@
   :root{
     --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599-1024x838.png");
     --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg-1024x771.png");
-    --img-footer: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/footer-bg-1024x341.png");
   }
 }
 @media (max-width:720px){
   :root{
     --img-studio: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/dance-studio-e1786030081599-768x628.png");
     --img-smoke:  url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/08/bg-768x578.png");
-    --img-footer: url("https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/footer-bg-768x256.png");
   }
 }
 
@@ -393,21 +390,21 @@ h1{ margin:0; }
 .shell{
   position:relative;
   padding:10px;
-  background:linear-gradient(180deg, rgba(255,255,255,.15), rgba(255,255,255,.03) 42%, rgba(255,255,255,.055));
-  border:1px solid rgba(255,255,255,.15);
+  background:linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.05) 42%, rgba(255,255,255,.08));
+  border:1px solid rgba(255,255,255,.20);
   border-radius:var(--r);
   box-shadow:var(--shadow-lift);
 }
 .core{
   position:relative;
-  background:linear-gradient(180deg,#161A1E,#0E1114 52%);
-  border:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(180deg,#1D242B,#151B22 55%);
+  border:1px solid rgba(255,255,255,.09);
   border-radius:2px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
   overflow:hidden;
 }
 
-.progress{ height:2px; background:rgba(255,255,255,.07); position:relative; }
+.progress{ height:2px; background:rgba(0,0,0,.35); position:relative; }
 .progress-bar{
   position:absolute; inset:0 auto 0 0; width:0%;
   background:linear-gradient(90deg,var(--blue-deep),var(--blue));
@@ -596,8 +593,8 @@ legend b{
 .done-sum{
   max-width:440px; margin:32px auto 0;
   padding:22px 24px; text-align:left;
-  background:rgba(255,255,255,.028);
-  border:1px solid var(--line-soft);
+  background:rgba(0,0,0,.26);
+  border:1px solid rgba(255,255,255,.08);
   border-radius:var(--r);
 }
 .done-sum dl{ display:grid; gap:12px; }
@@ -613,16 +610,9 @@ footer{
   position:relative;
   padding:40px 44px;
   text-align:center;
-  background:#0A0B0D;
+  background:#060708;
   border-top:1px solid var(--line-soft);
   overflow:hidden;
-}
-footer::before{
-  content:"";
-  position:absolute; inset:0;
-  background-image:var(--img-footer);
-  background-size:cover; background-position:50% 50%;
-  opacity:.55;
 }
 footer > *{ position:relative; }
 footer img{ height:42px; width:auto; margin:0 auto 16px; }
