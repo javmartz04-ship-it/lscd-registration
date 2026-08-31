@@ -109,6 +109,23 @@
      It will fail contrast, so it is Javier's call, not a default. */
   --cta-ink:     #052330;
 
+
+  /* ---- FORM CARD PALETTE ------------------------------------------------
+     The card carries its own palette so it can be a genuinely different
+     surface from the page, not a lighter shade of it. Change these nine
+     values and the whole card follows: header, fields, labels, hint, errors
+     and the success screen. Nothing else in the page reads them. */
+  --card-bg:      #FFFFFF;
+  --card-bg2:     #F4F6F8;
+  --card-line:    #E3E7EB;
+  --card-line-2:  #EDF0F3;
+  --card-ink:     #0E1114;
+  --card-ink-2:   #48535D;
+  --card-ink-3:   #6B757E;   /* 4.8:1 on white — the floor for 10.5px labels */
+  --card-field:   #FFFFFF;
+  --card-field-line: #D3DAE0;
+  --card-well:    #F4F6F8;
+
   --oswald: 'Oswald','Arial Narrow',sans-serif;
   --mont:   'Montserrat','Helvetica Neue',Arial,sans-serif;
   --script: 'Hurricane','Snell Roundhand',cursive;
@@ -397,14 +414,13 @@ h1{ margin:0; }
 }
 .core{
   position:relative;
-  background:linear-gradient(180deg,#1D242B,#151B22 55%);
-  border:1px solid rgba(255,255,255,.09);
+  background:linear-gradient(180deg,var(--card-bg),var(--card-bg2) 100%);
+  border:1px solid var(--card-line);
   border-radius:2px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
   overflow:hidden;
 }
 
-.progress{ height:2px; background:rgba(0,0,0,.35); position:relative; }
+.progress{ height:2px; background:var(--card-line-2); position:relative; }
 .progress-bar{
   position:absolute; inset:0 auto 0 0; width:0%;
   background:linear-gradient(90deg,var(--blue-deep),var(--blue));
@@ -414,11 +430,11 @@ h1{ margin:0; }
 .cardhead{
   display:flex; align-items:baseline; justify-content:space-between; gap:16px;
   padding:18px 36px;
-  border-bottom:1px solid var(--line-soft);
+  border-bottom:1px solid var(--card-line-2);
   font-size:10.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--t-50);
+  color:var(--card-ink-3);
 }
-.cardhead #count{ color:var(--t-74); white-space:nowrap; }
+.cardhead #count{ color:var(--card-ink-2); white-space:nowrap; }
 
 form{ padding:32px 36px 36px; }
 
@@ -427,18 +443,18 @@ fieldset + fieldset{ position:relative; margin-top:36px; padding-top:34px; }
 fieldset + fieldset::before{
   content:"";
   position:absolute; top:0; left:0; right:0; height:1px;
-  background:var(--line-soft);
+  background:var(--card-line-2);
 }
 legend{
   display:flex; align-items:baseline; gap:12px;
   font-size:11px; font-weight:500; letter-spacing:.24em; text-transform:uppercase;
-  color:var(--t-58);
+  color:var(--card-ink-3);
   padding:0; margin-bottom:24px;
 }
 legend b{
   font-family:var(--oswald); font-weight:500;
   font-size:13px; letter-spacing:.06em;
-  color:var(--blue);
+  color:#177CAE;
 }
 
 .row{ display:grid; gap:20px; }
@@ -449,7 +465,7 @@ legend b{
 .field label{
   font-family:var(--oswald); font-weight:500;
   font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--t-74);
+  color:var(--card-ink);
 }
 
 .field input,
@@ -460,60 +476,60 @@ legend b{
      field is smaller, which throws the parent out of the layout mid-form. */
   font-size:16px;
   font-weight:400; line-height:1.4;
-  color:var(--t-100);
-  background:var(--field);
-  border:1px solid var(--field-line);
+  color:var(--card-ink);
+  background:var(--card-field);
+  border:1px solid var(--card-field-line);
   border-radius:var(--r);
   padding:15px 16px;
   transition:border-color .3s var(--ease-soft), box-shadow .3s var(--ease-soft), background-color .3s var(--ease-soft);
   -webkit-appearance:none; appearance:none;
 }
-.field input::placeholder{ color:var(--t-50); }
+.field input::placeholder{ color:var(--card-ink-3); }
 @media (hover:hover){
   .field input:hover,
-  .field select:hover{ border-color:rgba(255,255,255,.22); }
+  .field select:hover{ border-color:#B9C3CB; }
 }
 .field input:focus,
 .field select:focus{
   outline:none;
-  border-color:var(--blue);
-  background:var(--blue-wash);
-  box-shadow:0 0 0 3px rgba(73,198,255,.16);
+  border-color:var(--blue-deep);
+  background:#F7FCFF;
+  box-shadow:0 0 0 3px rgba(73,198,255,.28);
 }
 .field select{
   padding-right:44px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23ffffff' stroke-opacity='.5' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%2378838C' stroke-opacity='1' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;
   background-position:right 16px center;
   cursor:pointer;
 }
-.field select.placeholder{ color:var(--t-50); }
+.field select.placeholder{ color:var(--card-ink-3); }
 /* native dropdown panels are painted by the OS — force a readable pairing */
 .field select option,
 .field select optgroup{ color:#101215; background:#fff; }
 
 .field.invalid input,
-.field.invalid select{ border-color:var(--danger-line); background:var(--danger-wash); }
+.field.invalid select{ border-color:#C9756A; background:#FCF2F0; }
 .field.invalid input:focus,
 .field.invalid select:focus{ box-shadow:0 0 0 3px rgba(232,140,125,.16); }
-.err{ font-size:12.5px; line-height:1.45; color:var(--danger); display:none; }
+.err{ font-size:12.5px; line-height:1.45; color:#A5493B; display:none; }
 .field.invalid .err{ display:block; }
 
 .hint{
   display:none;
   margin-top:11px;
   padding:12px 15px;
-  background:var(--blue-wash);
-  border:1px solid var(--blue-line);
+  background:#EAF7FE;
+  border:1px solid #BFE6FA;
   border-radius:var(--r);
   font-size:13px; line-height:1.6;
-  color:var(--t-74);
+  color:#1F4E66;
 }
 .hint.on{ display:block; }
 .hint b{
   display:block;
   font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--blue);
+  color:#177CAE;
   margin-bottom:4px;
 }
 
@@ -549,19 +565,19 @@ legend b{
 .cta:hover .cta-ico{ transform:translateX(5px); background:rgba(5,35,48,.26); }
 .cta-ico svg{ width:12px; height:12px; }
 
-.risk{ margin-top:18px; text-align:center; font-size:12.5px; line-height:1.7; color:var(--t-58); }
+.risk{ margin-top:18px; text-align:center; font-size:12.5px; line-height:1.7; color:var(--card-ink-2); }
 .risk span{ white-space:nowrap; }
 
 .formerr{
   display:none;
   margin-top:18px; padding:14px 16px;
-  background:var(--danger-wash);
-  border:1px solid var(--danger-line);
+  background:#FCF2F0;
+  border:1px solid #EBD2CD;
   border-radius:var(--r);
-  font-size:13.5px; line-height:1.6; color:var(--danger);
+  font-size:13.5px; line-height:1.6; color:#A5493B;
 }
 .formerr.on{ display:block; }
-.formerr a{ color:var(--danger); }
+.formerr a{ color:#A5493B; }
 
 /* ========================================================= 05 · SUCCESS */
 .done{ display:none; padding:60px 36px 50px; text-align:center; }
@@ -570,8 +586,8 @@ legend b{
   width:64px; height:64px; margin:0 auto 26px;
   display:grid; place-items:center;
   border-radius:50%;
-  background:var(--blue-wash);
-  box-shadow:inset 0 0 0 1px var(--blue-line), 0 0 40px rgba(73,198,255,.22);
+  background:#EAF7FE;
+  box-shadow:inset 0 0 0 1px #BFE6FA;
 }
 .done-mark svg{ width:26px; height:26px; }
 .done .done-script{
@@ -579,31 +595,31 @@ legend b{
   font-size:clamp(48px,5.4vw,72px);
   line-height:.98;
   text-wrap:balance;
-  color:var(--blue);
+  color:var(--blue-deep);
   margin-bottom:14px;
 }
 .done h2{
   font-family:var(--oswald); font-weight:500;
   font-size:19px; letter-spacing:.05em; text-transform:uppercase;
-  color:var(--t-100);
+  color:var(--card-ink);
   margin-bottom:16px;
 }
-.done p{ max-width:440px; margin:0 auto; font-size:15px; line-height:1.75; color:var(--t-74); }
-.done p a{ color:var(--t-100); }
+.done p{ max-width:440px; margin:0 auto; font-size:15px; line-height:1.75; color:var(--card-ink-2); }
+.done p a{ color:var(--card-ink); }
 .done-sum{
   max-width:440px; margin:32px auto 0;
   padding:22px 24px; text-align:left;
-  background:rgba(0,0,0,.26);
-  border:1px solid rgba(255,255,255,.08);
+  background:var(--card-well);
+  border:1px solid var(--card-line);
   border-radius:var(--r);
 }
 .done-sum dl{ display:grid; gap:12px; }
 .done-sum div{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; }
 .done-sum dt{
   font-size:10.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--t-50); white-space:nowrap;
+  color:var(--card-ink-3); white-space:nowrap;
 }
-.done-sum dd{ font-size:14px; color:var(--t-100); text-align:right; }
+.done-sum dd{ font-size:14px; color:var(--card-ink); text-align:right; }
 
 /* ========================================================== 06 · FOOTER */
 footer{
@@ -954,7 +970,7 @@ footer p{
               <!-- --------------------------------------------- success -->
               <div class="done" id="done" role="status" aria-live="polite">
                 <div class="done-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#49C6FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#21AEEF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
                 <p class="done-script" id="doneName">You&rsquo;re registered.</p>
                 <h2>We&rsquo;ll give you a call</h2>
