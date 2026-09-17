@@ -55,7 +55,7 @@
   keeps every entry in the browser's localStorage — nothing is sent anywhere.
 
   ------------------------------------------------------- WHAT TO EDIT LATER
-  · CLASSES  — the class dropdown, grouped by style. Real 2026-27 LSCD classes.
+  · CLASSES  — the class dropdown: main style categories only (per studio review).
   · AGES     — the age dropdown.
   · LEVELS   — the experience-level dropdown.
   · SUGGEST  — the blue "good fits for this age" hint under the class field.
@@ -772,10 +772,6 @@ footer p{
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
             Every level
           </span>
-          <span class="chip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            Serving Laredo since 2011
-          </span>
         </div>
       </div>
 
@@ -799,15 +795,15 @@ footer p{
             <li class="step rise" data-d="210">
               <span class="step-n">02</span>
               <span>
-                <span class="step-t">We&rsquo;ll give you a call</span>
-                <span class="step-d">We confirm the class, the day and the time, and answer anything you want to ask first.</span>
+                <span class="step-t">We&rsquo;ll call to set up a free trial class</span>
+                <span class="step-d">We pick the right class together, set a day and time for the trial, and answer anything you want to ask first.</span>
               </span>
             </li>
             <li class="step rise" data-d="260">
               <span class="step-n">03</span>
               <span>
-                <span class="step-t">Your dancer takes the class free</span>
-                <span class="step-d">Come try it. If it feels like home, we&rsquo;ll enroll them then. If not, no pressure and nothing owed.</span>
+                <span class="step-t">Your dancer takes a trial class</span>
+                <span class="step-d">Come try it and let us know if they like it. If it feels like home, we&rsquo;ll enroll them then. If not, no pressure and nothing owed.</span>
               </span>
             </li>
           </ol>
@@ -820,6 +816,10 @@ footer p{
             <div class="studio-row">
               <span class="studio-k">Questions</span>
               <span class="studio-v"><a href="tel:+19562201532">(956) 220-1532</a></span>
+            </div>
+            <div class="studio-row">
+              <span class="studio-k">Hours</span>
+              <span class="studio-v">Mon&ndash;Fri &middot; 4:30&ndash;9:00 PM<br>Saturday &middot; 9:30 AM&ndash;3:00 PM<br>Sunday &middot; Closed</span>
             </div>
           </div>
         </aside>
@@ -854,7 +854,7 @@ footer p{
                       <p class="err" id="parentEmail-err">Please enter a valid email address.</p>
                     </div>
                     <div class="field" data-field>
-                      <label for="parentPhone">Parent phone</label>
+                      <label for="parentPhone">Parent cell phone</label>
                       <input id="parentPhone" name="parentPhone" type="tel" autocomplete="tel"
                              inputmode="tel" placeholder="(956) 220-1532" required aria-describedby="parentPhone-err">
                       <p class="err" id="parentPhone-err">Please enter a 10-digit phone number.</p>
@@ -1009,92 +1009,22 @@ var AGES = [
 /* ---------------------------------------------------------------- LEVELS */
 var LEVELS = [
   "Brand new to dance",
-  "Some experience (1–2 years)",
-  "Intermediate (3+ years)",
-  "Advanced / pre-professional",
-  "Returning LSCD student",
-  "Not sure, please place my dancer"
+  "Previous experience"
 ];
 
 /* --------------------------------------------------------------- CLASSES
-   The real 2026–27 LSCD class list, grouped by style. Add or remove a line
-   and the dropdown updates itself.                                          */
+   Main style categories only — the studio places dancers by level itself,
+   so parents pick a style, not a specific class. Add or remove a line and
+   the dropdown updates itself.                                              */
 var CLASSES = [
-  { group:"Ballet", items:[
-    "Tiny Tots (18–35 months)",
-    "Tiny Movers (ages 3–4)",
-    "Pre-Ballet 1 (ages 5–7)",
-    "Pre-Ballet 2 (ages 8–9)",
-    "Pre-Ballet 3 (ages 9–10)",
-    "Youth Ballet 1A / 1B",
-    "Youth Ballet 2A",
-    "Youth Ballet 2B",
-    "Preparatory Grade 1",
-    "Preparatory Grade 2 / Grade 1 & Pointe 1",
-    "Grade 2 & Pointe 2",
-    "Grade 3–4 & Pointe 3/4",
-    "Teen / Adult Ballet 1",
-    "Teen / Adult Ballet 2/3"
-  ]},
-  { group:"Jazz", items:[
-    "Baby Jazz (ages 3–4)",
-    "Pre-Jazz 1 (ages 5–7)",
-    "Pre-Jazz 2 (ages 8–9)",
-    "Pre-Jazz 3 (ages 9–10)",
-    "Youth Jazz 2A",
-    "Youth Jazz 2B",
-    "Youth Contemporary Jazz 1A / 1B (ages 11–13)",
-    "Teen / Adult Contemporary Jazz 1A / 1B",
-    "Teen / Adult Contemporary Jazz 2/3",
-    "Jazz Funk (ages 15+)"
-  ]},
-  { group:"Hip Hop", items:[
-    "Pre-Hip Hop 1 (ages 5–7)",
-    "Pre-Hip Hop 2 (ages 8–9)",
-    "Pre-Hip Hop 3 (ages 9–10)",
-    "Youth Hip Hop 1A / 1B",
-    "Youth Hip Hop 2A / 2B",
-    "Teen Hip Hop 1/2",
-    "Boys Hip Hop (ages 9–13)"
-  ]},
-  { group:"Contemporary & Modern", items:[
-    "Youth Modern / Contemporary (ages 9–12)",
-    "Youth Lyrical / Contemporary",
-    "Teen / Adult Lyrical / Contemporary",
-    "Modern / Horton 1",
-    "Horton 2/3"
-  ]},
-  { group:"Tumbling", items:[
-    "Tumbling (ages 3–4)",
-    "Tumbling (ages 5–7)",
-    "Tumbling (ages 8–10)",
-    "Tumbling (ages 11–18)"
-  ]},
-  { group:"Turns & Leaps", items:[
-    "Pre-Turns & Leaps (ages 8–11)",
-    "Youth Turns & Leaps",
-    "Teen Beginner Turns & Leaps",
-    "Teen Int / Adv Turns & Leaps"
-  ]},
-  { group:"Fitness & Conditioning", items:[
-    "Mat Pilates",
-    "Sculpt & Stretch (ages 18+)",
-    "Strength & Flexibility (ages 9+)"
-  ]},
-  { group:"Pre-Professional & Companies (audition required)", items:[
-    "JR Ballet / Jazz Pre-Professional",
-    "INT Ballet Pre-Professional",
-    "INT Jazz & Contemporary Pre-Professional",
-    "SR Ballet Pre-Professional",
-    "SR Jazz & Contemporary Pre-Professional",
-    "JR Drill Company",
-    "Lil Blaze Crew",
-    "GRÜV 956 Crew",
-    "NFS CRÜ"
-  ]},
-  { group:"Still deciding", items:[
-    "Not sure yet · please help us choose"
-  ]}
+  "Ballet",
+  "Jazz",
+  "Hip Hop",
+  "Lyrical / Contemporary & Modern",
+  "Tumbling",
+  "Turns & Leaps",
+  "Fitness & Conditioning",
+  "Pre-Professional & Companies (audition required)"
 ];
 
 /* -------------------------------------------------------------- SUGGEST
@@ -1158,12 +1088,7 @@ var SUGGEST = {
 
   var clsSel = $("#classInterest");
   clsSel.appendChild(placeholderOpt("Select a class"));
-  CLASSES.forEach(function(g){
-    var og = document.createElement("optgroup");
-    og.label = g.group;
-    g.items.forEach(function(i){ og.appendChild(opt(i)); });
-    clsSel.appendChild(og);
-  });
+  CLASSES.forEach(function(c){ clsSel.appendChild(opt(c)); });
 
   /* keeps the muted "placeholder" colour until a real choice is made */
   function syncSelectColour(sel){
