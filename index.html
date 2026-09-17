@@ -200,21 +200,11 @@ img{ max-width:100%; display:block; }
 }
 .topbar-in{
   max-width:1240px; margin:0 auto;
-  padding:15px max(44px, env(safe-area-inset-right)) 15px max(44px, env(safe-area-inset-left));
-  display:flex; align-items:center; justify-content:space-between; gap:24px;
+  padding:18px max(44px, env(safe-area-inset-right)) 18px max(44px, env(safe-area-inset-left));
+  display:flex; align-items:center; justify-content:center;
 }
 .topbar-logo{ display:inline-flex; align-items:center; min-height:44px; }
-.topbar-logo img{ height:44px; width:auto; }
-.topbar-call{
-  font-family:var(--oswald); font-weight:400; font-size:14px;
-  letter-spacing:.11em; text-transform:uppercase;
-  color:var(--t-74); text-decoration:none;
-  display:inline-flex; align-items:center; gap:9px;
-  min-height:44px;                    /* thumb-sized, not text-sized */
-  transition:color .32s var(--ease); white-space:nowrap;
-}
-@media (hover:hover){ .topbar-call:hover{ color:var(--blue); } }
-.topbar-call svg{ width:14px; height:14px; flex:none; }
+.topbar-logo img{ height:68px; width:auto; }
 
 /* ====================================================== 03 · THE ACT
    Hero and form are ONE section, not two stacked ones. A single background
@@ -347,27 +337,33 @@ h1{ margin:0; }
 }
 .step-d{ display:block; font-size:14.5px; line-height:1.65; color:var(--t-58); }
 
-.studio{
+.ask{
   margin-top:34px;
-  padding:24px 26px;
+  padding:30px 26px 32px;
+  text-align:center;
   background:rgba(255,255,255,.028);
   border:1px solid var(--line-soft);
   border-radius:var(--r);
 }
-.studio-row + .studio-row{ margin-top:16px; }
-.studio-k{
-  display:block;
+.ask-k{
   font-size:10.5px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
   color:var(--t-50);
-  margin-bottom:3px;
+  margin-bottom:8px;
 }
-.studio-v{ display:block; font-size:14.5px; line-height:1.6; color:var(--t-100); }
-.studio-v a{
-  color:var(--t-100); text-decoration:none;
-  border-bottom:1px solid var(--line);
-  display:inline-flex; align-items:center; min-height:44px;
+.ask-t{
+  font-family:var(--oswald); font-weight:500;
+  font-size:20px; letter-spacing:.03em; text-transform:uppercase;
+  color:var(--t-100);
 }
-@media (hover:hover){ .studio-v a:hover{ color:var(--blue); border-bottom-color:var(--blue-line); } }
+.ask-n{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; margin-top:8px;
+  font-family:var(--oswald); font-weight:600;
+  font-size:clamp(30px,3.4vw,40px); letter-spacing:.01em;
+  color:var(--blue); text-decoration:none;
+  transition:color .3s var(--ease);
+}
+@media (hover:hover){ .ask-n:hover{ color:#8FDDFF; } }
 
 /* ------------------------------------------------- 04b · the form card
    Double bezel on dark: outer shell catches a rim light, inner core is the
@@ -596,20 +592,91 @@ legend b{
 }
 .done-sum dd{ font-size:14px; color:var(--card-ink); text-align:right; }
 
-/* ========================================================== 06 · FOOTER */
+/* ========================================================== 06 · FOOTER
+   Rebuilt to match the main site's footer so every page carries the same one. */
 footer{
   position:relative;
-  padding:40px 44px;
-  text-align:center;
-  background:#060708;
+  background:#111;
   border-top:1px solid var(--line-soft);
-  overflow:hidden;
 }
-footer > *{ position:relative; }
-footer img{ height:42px; width:auto; margin:0 auto 16px; }
-footer p{
-  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--t-50);
+.sf-in{
+  max-width:1240px; margin:0 auto;
+  padding:64px max(44px, env(safe-area-inset-right)) 52px max(44px, env(safe-area-inset-left));
+  display:grid;
+  grid-template-columns:1.25fr .85fr 1.1fr;
+  gap:48px;
+  align-items:start;
+}
+.sf-logo{ display:inline-block; }
+.sf-logo img{ width:190px; height:auto; }
+.sf-word{
+  font-family:var(--script);
+  font-size:26px; line-height:1.1;
+  color:var(--t-100);
+  margin-top:6px;
+}
+.sf-tag{
+  margin-top:12px; max-width:330px;
+  font-size:15px; line-height:1.7;
+  color:rgba(255,255,255,.84);
+}
+.sf-social{ display:flex; gap:12px; margin-top:22px; }
+.sf-social a{
+  width:40px; height:40px;
+  display:grid; place-items:center;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:50%;
+  color:var(--t-100);
+  transition:border-color .3s var(--ease), color .3s var(--ease);
+}
+.sf-social svg{ width:17px; height:17px; }
+@media (hover:hover){ .sf-social a:hover{ color:var(--blue); border-color:var(--blue-line); } }
+
+footer h2{
+  font-family:var(--oswald); font-weight:700;
+  font-size:18px; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--t-100);
+  margin-bottom:20px;
+}
+.sf-links{ list-style:none; }
+.sf-links a{
+  display:inline-flex; align-items:center; min-height:34px;
+  font-size:15px; color:rgba(255,255,255,.84); text-decoration:none;
+  transition:color .3s var(--ease);
+}
+@media (hover:hover){ .sf-links a:hover{ color:var(--blue); } }
+
+.sf-phone{
+  display:inline-flex; align-items:center; min-height:44px;
+  font-family:var(--oswald); font-weight:500;
+  font-size:24px; letter-spacing:.01em;
+  color:var(--t-100); text-decoration:none;
+  margin-bottom:14px;
+  transition:color .3s var(--ease);
+}
+@media (hover:hover){ .sf-phone:hover{ color:var(--blue); } }
+.sf-rows{ list-style:none; display:grid; gap:14px; }
+.sf-rows li{
+  display:grid; grid-template-columns:auto minmax(0,1fr); gap:12px;
+  font-size:15px; line-height:1.7; color:rgba(255,255,255,.84);
+}
+.sf-rows svg{ width:17px; height:17px; margin-top:4px; color:var(--blue); }
+.sf-rows a{ color:rgba(255,255,255,.84); text-decoration:none; }
+@media (hover:hover){ .sf-rows a:hover{ color:var(--blue); } }
+
+.sf-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:20px 44px;
+  text-align:center;
+  font-size:13px;
+  color:rgba(255,255,255,.52);
+}
+.sf-bottom a{ color:rgba(255,255,255,.52); text-decoration:none; }
+@media (hover:hover){ .sf-bottom a:hover{ color:var(--blue); } }
+.sf-bottom .sep{ padding:0 10px; color:rgba(255,255,255,.28); }
+
+@media (max-width:960px){
+  .sf-in{ grid-template-columns:minmax(0,1fr); gap:38px; padding-top:48px; }
 }
 
 /* ========================================================== 07 · MOTION */
@@ -665,8 +732,7 @@ footer p{
     padding:10px max(20px, env(safe-area-inset-right)) 10px max(20px, env(safe-area-inset-left));
     gap:14px;
   }
-  .topbar-logo img{ height:34px; }
-  .topbar-call span{ display:none; }
+  .topbar-logo img{ height:46px; }
   /* Trimmed so the top of the form card breaks the fold on a 667px phone —
      the parent should see where they are going without hunting for it. */
   .act{
@@ -707,7 +773,7 @@ footer p{
   .cta{ padding:18px 12px; font-size:12px; letter-spacing:.06em; gap:8px; }
   .cta-ico{ width:22px; height:22px; }
   .h1-line{ font-size:33px; }
-  .studio{ padding:20px 18px; }
+  .ask{ padding:24px 18px 26px; }
   .step{ gap:14px; }
 }
 
@@ -741,16 +807,8 @@ footer p{
      renders above this page. -->
 <header class="topbar">
   <div class="topbar-in">
-    <a class="topbar-logo" href="https://blueviolet-wren-942205.hostingersite.com/" aria-label="Laredo School of Contemporary Dance home">
-      <img src="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png"
-           srcset="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png 768w,
-                   https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-1536x397.png 1536w"
-           sizes="180px" width="768" height="199"
-           alt="Laredo School of Contemporary Dance">
-    </a>
-    <a class="topbar-call" href="tel:+19562201532">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <span>Call</span> (956) 220-1532
+    <a class="topbar-logo" href="https://violet-rail-831026.hostingersite.com/" aria-label="Laredo School of Contemporary Dance home">
+      <img src="https://violet-rail-831026.hostingersite.com/wp-content/uploads/2026/08/lscd-long-logo.png" width="1642" height="394" alt="Laredo School of Contemporary Dance">
     </a>
   </div>
 </header>
@@ -818,19 +876,10 @@ footer p{
             </li>
           </ol>
 
-          <div class="studio rise" data-d="310">
-            <div class="studio-row">
-              <span class="studio-k">Studio</span>
-              <span class="studio-v">5901 McPherson Rd, Suite 12&ndash;14A, 2&ndash;4C<br>Laredo, Texas 78041</span>
-            </div>
-            <div class="studio-row">
-              <span class="studio-k">Questions</span>
-              <span class="studio-v"><a href="tel:+19562201532">(956) 220-1532</a></span>
-            </div>
-            <div class="studio-row">
-              <span class="studio-k">Hours</span>
-              <span class="studio-v">Mon&ndash;Fri &middot; 4:30&ndash;9:00 PM<br>Saturday &middot; 9:30 AM&ndash;3:00 PM<br>Sunday &middot; Closed</span>
-            </div>
+          <div class="ask rise" data-d="310">
+            <p class="ask-k">Got any questions?</p>
+            <p class="ask-t">Give us a call right now</p>
+            <a class="ask-n" href="tel:+19562201532">(956) 220-1532</a>
           </div>
         </aside>
 
@@ -948,12 +997,67 @@ footer p{
 </main>
 
 <footer>
-  <img src="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png"
-       srcset="https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-768x199.png 768w,
-               https://blueviolet-wren-942205.hostingersite.com/wp-content/uploads/2026/07/LSCD-05-scaled-e1786719883818-1536x397.png 1536w"
-       sizes="170px" width="768" height="199" loading="lazy"
-       alt="Laredo School of Contemporary Dance">
-  <p>&copy; 2026 LSCD. All rights reserved.</p>
+  <div class="sf-in">
+
+    <div>
+      <a class="sf-logo" href="https://violet-rail-831026.hostingersite.com/" aria-label="Laredo School of Contemporary Dance home">
+        <img src="https://violet-rail-831026.hostingersite.com/wp-content/uploads/2026/08/5592325d-b341-4617-a323-14dab7d51a29.png-Edited-1024x532.png" width="1024" height="532" loading="lazy" alt="Laredo School of Contemporary Dance">
+      </a>
+      <div class="sf-word">Laredo School of Contemporary Dance</div>
+      <p class="sf-tag">Professional dance training in Laredo for every age and every level.</p>
+      <div class="sf-social">
+        <a href="https://www.facebook.com/LaredoSchoolofContemporaryDance/" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.49-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/laredoscd/" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.youtube.com/channel/UCBXnzg34sFG7c2nbaR7X9eQ" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.2-.41-4.74a2.5 2.5 0 0 0-1.76-1.77C19.29 5.07 12 5.07 12 5.07s-7.29 0-8.83.42a2.5 2.5 0 0 0-1.76 1.77C1 8.8 1 12 1 12s0 3.2.41 4.74a2.5 2.5 0 0 0 1.76 1.77c1.54.42 8.83.42 8.83.42s7.29 0 8.83-.42a2.5 2.5 0 0 0 1.76-1.77C23 15.2 23 12 23 12zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <nav aria-label="Quick links">
+      <h2>Quick Links</h2>
+      <ul class="sf-links">
+        <li><a href="https://violet-rail-831026.hostingersite.com/">Home</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/classes/">Classes</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/pre-professional-programs/">Pre-Professional</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/lscd-foundation/">LSCD Foundation</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/lscd-dance-collective/">LSCD Dance Collective</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/birthday-parties/">Birthday Parties</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/annual-events/">Annual Events</a></li>
+        <li><a href="https://violet-rail-831026.hostingersite.com/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2>Contact Us</h2>
+      <a class="sf-phone" href="tel:+19562201532">+1 (956) 220-1532</a>
+      <ul class="sf-rows">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>5901 McPherson Rd Suite 12-14A, 2-4C<br>Laredo, Texas 78041</span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          <span><a href="mailto:laredoscd@gmail.com">laredoscd@gmail.com</a></span>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span>Monday&ndash;Friday, 4:30&ndash;9:00 p.m.<br>Saturday, 9:30 a.m.&ndash;3:00 p.m.<br>Sunday, closed.</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="sf-bottom">
+    Copyright &copy;2026 LSCD. All rights reserved.
+    <span class="sep">|</span><a href="#">Privacy Policy</a>
+    <span class="sep">|</span><a href="#">Terms and Conditions</a>
+  </div>
 </footer>
 
 <script>
