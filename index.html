@@ -10,7 +10,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Montserrat:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
 
 <!--
 ================================================================================
@@ -25,7 +25,7 @@
   the same room rather than a different website. Every device below is measured
   off their live site, not invented:
 
-    · blue Hurricane script eyebrow above the headline   (their section pattern)
+    · blue brush-script eyebrow above the headline       (their section pattern)
     · heavy Oswald caps headline, tight, 2 lines
     · the signature 86px blue gradient rule under it     (used sitewide)
     · a diagonal seam with a glowing blue edge between
@@ -64,6 +64,16 @@
 -->
 
 <style>
+/* Brush Script Std Italic by Monotype — the studio's licensed MyFonts
+   webfont (MyFonts Webfont Build ID 3867246). Licensed to the website owner;
+   files live in fonts/brush-script-std/. */
+@font-face{
+  font-family:"BrushScriptStdItalic";
+  src:url("fonts/brush-script-std/BrushScriptStdItalic.woff2") format("woff2"),
+      url("fonts/brush-script-std/BrushScriptStdItalic.woff") format("woff");
+  font-display:swap;
+}
+
 /* ============================================================ 01 · TOKENS
    Read off the live LSCD site with getComputedStyle. Nothing guessed.        */
 :root{
@@ -128,7 +138,7 @@
 
   --oswald: 'Oswald','Arial Narrow',sans-serif;
   --mont:   'Montserrat','Helvetica Neue',Arial,sans-serif;
-  --script: 'Hurricane','Snell Roundhand',cursive;
+  --script: 'BrushScriptStdItalic','Brush Script MT',cursive;
 
   --r:  3px;   /* one radius language, held everywhere */
   --ease: cubic-bezier(.22,1,.36,1);
@@ -253,7 +263,7 @@ img{ max-width:100%; display:block; }
 
 .eyebrow{
   font-family:var(--script);
-  font-size:36px;
+  font-size:30px;
   line-height:1;
   color:var(--blue);
   margin-bottom:12px;
@@ -273,7 +283,7 @@ h1{ margin:0; }
 .h1-script{
   display:block;
   font-family:var(--script); font-weight:400;
-  font-size:clamp(52px,6.4vw,88px);
+  font-size:clamp(44px,5.4vw,74px);
   line-height:.92;
   color:var(--blue);
   margin-top:6px;
@@ -304,7 +314,7 @@ h1{ margin:0; }
 .chip svg{ width:13px; height:13px; color:var(--blue); flex:none; }
 
 /* ------------------------------------------------------- 04a · left rail */
-.rail-eyebrow{ font-size:30px; margin-bottom:6px; }
+.rail-eyebrow{ font-size:25px; margin-bottom:6px; }
 .rail-h{
   font-family:var(--oswald); font-weight:600;
   font-size:clamp(24px,2.6vw,30px);
@@ -557,7 +567,7 @@ legend b{
 .done-mark svg{ width:26px; height:26px; }
 .done .done-script{
   font-family:var(--script);
-  font-size:clamp(48px,5.4vw,72px);
+  font-size:clamp(40px,4.5vw,60px);
   line-height:.98;
   text-wrap:balance;
   color:#1E8FC4;              /* 3.5:1 on the card — #21AEEF measured 2.4:1 */
@@ -614,7 +624,7 @@ footer p{
   .act{ padding:140px 44px 128px; }
   .act-head{ max-width:830px; }
   .h1-line{ font-size:70px; }
-  .h1-script{ font-size:100px; }
+  .h1-script{ font-size:84px; }
   .act-sub{ font-size:18px; max-width:560px; }
   .act-in, .topbar-in{ max-width:1520px; }
   .act-in{ column-gap:72px; row-gap:64px; }
@@ -626,7 +636,7 @@ footer p{
   .act-in, .topbar-in{ max-width:1680px; }
   .act-in{ column-gap:88px; row-gap:72px; }
   .h1-line{ font-size:78px; }
-  .h1-script{ font-size:112px; }
+  .h1-script{ font-size:94px; }
   .act-sub{ font-size:19px; max-width:640px; }
   .act{ padding-top:160px; padding-bottom:150px; }
 }
@@ -662,7 +672,7 @@ footer p{
   .act{
     padding:40px max(20px, env(safe-area-inset-right)) 64px max(20px, env(safe-area-inset-left));
   }
-  .eyebrow{ font-size:26px; margin-bottom:8px; }
+  .eyebrow{ font-size:22px; margin-bottom:8px; }
   .rule{ margin-top:16px; width:72px; }
   .act-sub{ margin-top:18px; font-size:15.5px; line-height:1.62; }
   .act-meta{ gap:7px; margin-top:20px; }
@@ -682,7 +692,7 @@ footer p{
 /* The script line breaks on narrow screens — but deliberately, balanced
    across two lines, never with "free." stranded as a widow. */
 @media (max-width:560px){
-  .h1-script{ font-size:clamp(44px,13.2vw,62px); line-height:.98; text-wrap:balance; }
+  .h1-script{ font-size:clamp(37px,11.1vw,52px); line-height:.98; text-wrap:balance; }
 }
 
 /* Small phones: 320–380px. Claw back gutter so the fields stay comfortable,
@@ -705,8 +715,8 @@ footer p{
    form, and there is no room for a tall photograph. */
 @media (max-height:560px) and (orientation:landscape){
   .act{ padding-top:32px; padding-bottom:48px; }
-  .eyebrow{ font-size:24px; }
-  .h1-script{ font-size:44px; }
+  .eyebrow{ font-size:20px; }
+  .h1-script{ font-size:37px; }
   .act-meta{ margin-top:16px; }
   .split{ margin-top:28px; }
 }
