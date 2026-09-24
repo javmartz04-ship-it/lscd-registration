@@ -110,7 +110,7 @@ legend b{font-family:var(--oswald); font-weight:500;font-size:13px; letter-spaci
 .done-sum div{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:16px; align-items:baseline; }
 .done-sum dt{font-size:10.5px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;color:var(--card-ink-3); white-space:nowrap;}
 .done-sum dd{ font-size:14px; color:var(--card-ink); text-align:right; }
-.sitefoot{position:relative;background:#111;border-top:1px solid var(--line-soft);}
+.sitefoot{position:relative;background:#08090B;border-top:1px solid var(--line-soft);}
 .sf-in{max-width:1240px; margin:0 auto;padding:64px max(44px, env(safe-area-inset-right)) 52px max(44px, env(safe-area-inset-left));display:grid;grid-template-columns:1.25fr .85fr 1.1fr;gap:48px;align-items:start;}
 .sf-logo{ display:inline-block; color:inherit; }
 .sf-logo img{ width:190px; height:auto; }
@@ -735,7 +735,10 @@ var SUGGEST = {
  try {
  window.parent.postMessage({
  type: "lscd-registration-height",
- height: Math.ceil(document.documentElement.scrollHeight)
+ /* body, not documentElement: inside an iframe the root element
+ stretches to fill the frame, so it reports the height it already
+ has and the frame can never shrink back. */
+ height: Math.ceil(document.body.getBoundingClientRect().height)
  }, "*");
  } catch (err) {}
  }

@@ -587,7 +587,7 @@ legend b{
    Rebuilt to match the main site's footer so every page carries the same one. */
 .sitefoot{
   position:relative;
-  background:#111;
+  background:#08090B;
   border-top:1px solid var(--line-soft);
 }
 .sf-in{
@@ -1401,7 +1401,10 @@ var SUGGEST = {
     try {
       window.parent.postMessage({
         type: "lscd-registration-height",
-        height: Math.ceil(document.documentElement.scrollHeight)
+        /* body, not documentElement: inside an iframe the root element
+           stretches to fill the frame, so it reports the height it already
+           has and the frame can never shrink back. */
+        height: Math.ceil(document.body.getBoundingClientRect().height)
       }, "*");
     } catch (err) {}
   }
