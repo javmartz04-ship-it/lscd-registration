@@ -956,9 +956,8 @@ footer h2{
                     <div class="field" data-field>
                       <label for="classInterest">Class interested in</label>
                       <select id="classInterest" name="classInterest" class="placeholder" required
-                              aria-describedby="classInterest-err classInterest-hint"></select>
+                              aria-describedby="classInterest-err"></select>
                       <p class="err" id="classInterest-err">Please choose a class, or pick &ldquo;Not sure yet.&rdquo;</p>
-                      <p class="hint" id="classInterest-hint" aria-live="polite"><b>Good fits for this age</b><span id="hintText"></span></p>
                     </div>
                   </div>
                 </fieldset>
@@ -983,7 +982,7 @@ footer h2{
                 <div class="done-mark" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#177CAE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
                 </div>
-                <p class="done-script" id="doneName">You&rsquo;re registered.</p>
+                <p class="done-script" id="doneName">Welcome to LSCD.</p>
                 <h2>We&rsquo;ll give you a call</h2>
                 <p>
                   Someone from LSCD will call to confirm the class, the day and the time for
@@ -1182,8 +1181,6 @@ var SUGGEST = {
   var count  = $("#count");
   var submit = $("#submit");
   var formerr= $("#formerr");
-  var hint   = $("#classInterest-hint");
-  var hintTx = $("#hintText");
 
   /* ------------------------------------------------- build the dropdowns */
   function opt(value, label){
@@ -1263,14 +1260,6 @@ var SUGGEST = {
     el.addEventListener("blur",   function(){ if (valueOf(id)) markField(id, isValid(id)); });
   });
 
-  /* -------------------------------------------------- age-based class hint */
-  ageSel.addEventListener("change", function(){
-    var s = SUGGEST[ageSel.value];
-    if (s){ hintTx.textContent = s; hint.classList.add("on"); }
-    else  { hint.classList.remove("on"); }
-    pingHeight();
-  });
-
   /* ---------------------------------------------------------- submission */
   function payload(){
     var pName = valueOf("parentName");
@@ -1314,8 +1303,6 @@ var SUGGEST = {
   }
 
   function showSuccess(data){
-    var first = data.studentName.split(" ")[0] || "";
-    $("#doneName").textContent = first ? ("Welcome, " + first + ".") : "You\u2019re registered.";
 
     var rows = [
       ["Dancer",  data.studentName],
